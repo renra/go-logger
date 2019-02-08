@@ -19,7 +19,7 @@ pipeline:
     image: local/logger:${DRONE_COMMIT_SHA:0:7}
     commands:
       - cd /go/src/app
-      - echo 'Testing'
+      - make test
     environment:
     when:
       event: [push, tag]
