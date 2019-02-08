@@ -24,8 +24,8 @@ func main() {
   infoLogLevel := 1
 
   l := logger.Logger{
-    Label: "simple example",
-    Severity: infoLogLevel,
+    Label: "GCP example",
+    ThresholdSeverity: infoLogLevel,
     Severities: map[int]string{
       errLogLevel: "ERROR",
       infoLogLevel: "INFO",
@@ -43,3 +43,4 @@ func main() {
   l.LogErrorWithSeverity(&Error{msg: "I am a msg", trace: "I am a trace"}, errLogLevel)
   l.LogErrorWithSeverity(&Error{msg: "I am a msg", trace: "I am a trace"}, -1) // prints with the UNKNOWN label
 }
+

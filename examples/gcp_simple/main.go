@@ -2,8 +2,6 @@ package main
 
 import (
   logger "app"
-  "fmt"
-  "encoding/json"
 )
 
 type Error struct {
@@ -24,18 +22,13 @@ func main() {
   infoLogLevel := 1
 
   l := logger.Logger{
-    Label: "simple example",
-    Severity: infoLogLevel,
+    Label: "GCP simple example",
+    ThresholdSeverity: infoLogLevel,
     Severities: map[int]string{
       errLogLevel: "ERROR",
       infoLogLevel: "INFO",
     },
-    Serialize: func(logger *logger.Logger, data map[string]string, severity int) {
-      d := logger.MergeWithBasicDataForGCP(data, severity)
-      bytes, _ := json.Marshal(d)
-
-      fmt.Println(string(bytes))
-    },
+    Serialize: logger.GCPSerialize,
   }
 
   l.LogWithSeverity(map[string]string{"message": "Hello World"}, infoLogLevel)
@@ -43,3 +36,5 @@ func main() {
   l.LogErrorWithSeverity(&Error{msg: "I am a msg", trace: "I am a trace"}, errLogLevel)
   l.LogErrorWithSeverity(&Error{msg: "I am a msg", trace: "I am a trace"}, -1) // prints with the UNKNOWN label
 }
+
+
