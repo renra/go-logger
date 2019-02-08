@@ -5,12 +5,7 @@ import (
 )
 
 type Error struct {
-  msg string
   trace string
-}
-
-func (e *Error) Msg() string {
-  return e.msg
 }
 
 func (e *Error) Trace() string {
@@ -31,5 +26,6 @@ func main() {
   }
 
   l.LogWithSeverity("Hello World", infoLogLevel)
-  l.LogError(&Error{msg: "I am an error", trace: "I am a trace"}, errLogLevel)
+  l.LogErrorWithSeverity(&Error{trace: "I am a trace"}, errLogLevel)
+  l.LogErrorWithSeverity(&Error{trace: "I am a trace"}, -1) // prints with the UNKNOWN label
 }

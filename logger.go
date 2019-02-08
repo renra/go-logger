@@ -5,6 +5,8 @@ import (
   "time"
 )
 
+const UnknownLabel = "UNKNOWN"
+
 type Logger struct {
   WhoAmI string
   Severity int
@@ -18,7 +20,7 @@ func (l *Logger) LogWithSeverity(msg string, severity int) {
     severityLabel, found := l.Severities[severity]
 
     if found == false {
-      severityLabel = "UNKNOWN"
+      severityLabel = UnknownLabel
     }
 
     timestamp := time.Now().Unix()
@@ -32,11 +34,10 @@ func (l *Logger) LogWithSeverity(msg string, severity int) {
 }
 
 type Error interface {
-  Msg() string
   Trace() string
 }
 
-func (l *Logger) LogError(e Error, severity int) {
+func (l *Logger) LogErrorWithSeverity(e Error, severity int) {
   msg := fmt.Sprintf("{\"trace\":\"%s\"}", e.Trace())
   l.LogWithSeverity(msg, severity)
 }
