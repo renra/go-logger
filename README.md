@@ -59,3 +59,5 @@ l.LogWithSeverity(map[string]string{"message": "Hello World"}, infoLogLevel)
 ```
 
 In which case the output looks like this: `{"date":1549636260,"message":"Hello World","serviceContext":{"service":"GCP simple example"},"severity":"INFO"}`
+
+Check out the working examples in the examples folder if you need to.
