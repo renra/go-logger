@@ -17,5 +17,6 @@ gcp:
 gcp_simple:
 	go run ${SOURCES}/examples/gcp_simple/main.go
 
+.DEFAULT_GOAL := test
 test: simple gcp gcp_simple
 

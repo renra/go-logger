@@ -51,13 +51,3 @@ func (l *Logger) SeverityLabel(severity int) string {
     return severityLabel
   }
 }
-
-type Error interface {
-  Msg() string
-  Trace() string
-}
-
-func (l *Logger) LogErrorWithSeverity(e Error, severity int) {
-  l.LogWithSeverity(map[string]string{"message": e.Msg(), "trace": e.Trace()}, severity)
-}
-

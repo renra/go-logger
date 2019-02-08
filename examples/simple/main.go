@@ -4,17 +4,17 @@ import (
   "fmt"
   "time"
   "strings"
-  logger "app"
+  "app/logger"
 )
 
 func main() {
-  infoLogLevel := 0
+  infoSeverity := 0
 
   l := logger.Logger{
     Label: "simple example",
-    ThresholdSeverity: infoLogLevel,
+    ThresholdSeverity: infoSeverity,
     Severities: map[int]string{
-      infoLogLevel: "INFO",
+      infoSeverity: "INFO",
     },
     Serialize: func(logger *logger.Logger, data map[string]string, severity int) {
       t := time.Now().Unix()
@@ -28,6 +28,6 @@ func main() {
     },
   }
 
-  l.LogWithSeverity(map[string]string{"message": "Hello World"}, infoLogLevel)
+  l.LogWithSeverity(map[string]string{"message": "Hello World"}, infoSeverity)
 }
 

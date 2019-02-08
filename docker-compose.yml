@@ -6,7 +6,7 @@ services:
     environment:
       - SHELL=/bin/sh
     volumes:
-      - ./logger.go:/go/src/app/logger.go
+      - ./logger/:/go/src/app/logger/
       - ./examples/:/go/src/app/examples/
       - ./Makefile:/go/src/app/Makefile
 
