@@ -9,11 +9,6 @@ pipeline:
       - docker build -f Dockerfile -t local/logger:${DRONE_COMMIT_SHA:0:7} .
     when:
       event: [push, tag]
-  build-for-deployment:
-    <<: *build-anchor
-    when:
-      event: deployment
-      environment: [staging, testing]
 
   tests: &tests-anchor
     image: local/logger:${DRONE_COMMIT_SHA:0:7}
@@ -23,13 +18,6 @@ pipeline:
     environment:
     when:
       event: [push, tag]
-
-  export-app-revision:
-    image: alpine
-    commands:
-      - 'sed -i -e "s/^appVersion: .*$/appVersion: ${DRONE_COMMIT_SHA:0:7}/g" charts/logger/Chart.yaml'
-    when:
-      event: deployment
 
   slack:
     image: plugins/slack
