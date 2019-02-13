@@ -8,17 +8,15 @@ dep:
 clean:
 	rm -rf ${BINS}/logger
 
-dev:
-	go run ${SOURCES}/examples/main.go
+simple:
+	go run ${SOURCES}/examples/simple/main.go
 
-build: clean
-	CGO_ENABLED=0 GOOS=linux packr2 build -a -installsuffix cgo -o ${BINS}/logger ${SOURCES}/examples/main.go
+gcp:
+	go run ${SOURCES}/examples/gcp/main.go
 
-run:
-	${BINS}/logger
+gcp_simple:
+	go run ${SOURCES}/examples/gcp_simple/main.go
 
-build_and_run: build run
-
-test:
-	@echo "Testing"
+.DEFAULT_GOAL := test
+test: simple gcp gcp_simple
 
